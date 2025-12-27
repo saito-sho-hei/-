@@ -55,7 +55,8 @@ async function fetchNotePosts(container, filterCategory = null) {
     for (const proxy of proxies) {
         if (fetchSuccess) break;
         try {
-            const proxyUrl = proxy(NOTE_RSS_URL);
+            const timestamp = new Date().getTime(); // Cache busting
+            const proxyUrl = proxy(NOTE_RSS_URL) + `&t=${timestamp}`;
             const response = await fetch(proxyUrl);
             if (!response.ok) throw new Error(`Proxy error: ${response.status}`);
 
