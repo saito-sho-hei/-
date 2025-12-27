@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地方メーカー再生論 - ねことそろばん</title>
+    <meta name="description" content="東京に埋もれるな。地方で輝け。データと戦略で、中小企業の「人」と「経営」をもっと楽しく科学する！">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">🚀 地方メーカー再生論 <span
+                style="font-size:0.8em; color:var(--color-accent-orange)">ねことそろばん</span></a>
+        <button class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="about.html">経営・トピックス</a></li>
+                <li><a href="sabermetrics.html">組織・AI</a></li>
+                <li><a href="recruit.html">就職戦略</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>東京に埋もれるな。地方で輝け。<br>データと戦略で、中小企業の『人』と『経営』を<br>もっと楽しく科学する！</h1>
+            <p>地方工場 × 中小企業診断士 × セイバーメトリクス。新しい視点で「働く」を再定義するメディア。</p>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- 3 Pillars -->
+        <section class="pillars">
+            <article class="pillar-card" onclick="filterPosts('Management')">
+                <span class="pillar-icon">📚</span>
+                <h2 class="pillar-title"><span style="display:inline-block">経営の知識と</span><span
+                        style="display:inline-block">現場トピックス</span></h2>
+                <p>どんぶり勘定からの脱却。管理会計と経営理論を、現場目線でわかりやすく解説。</p>
+            </article>
+            <article class="pillar-card" onclick="filterPosts('Analytics')">
+                <span class="pillar-icon">📊</span>
+                <h2 class="pillar-title"><span style="display:inline-block">組織・人事と</span><span
+                        style="display:inline-block">AI活用</span></h2>
+                <p>「声のデカさ」より「数字」。従業員セイバーメトリックスで組織の真実を暴く。</p>
+            </article>
+            <article class="pillar-card" onclick="filterPosts('Career')">
+                <span class="pillar-icon">🚀</span>
+                <h2 class="pillar-title"><span style="display:inline-block">地方就職の</span><span
+                        style="display:inline-block">戦略論</span></h2>
+                <p>消耗戦を避けて、したたかに生きる。地方メーカーこそがブルーオーシャンだ。</p>
+            </article>
+        </section>
+
+        <!-- Main Content + Sidebar -->
+        <div class="main-grid">
+
+            <main>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2>🚀 最新の記事</h2>
+                    <button onclick="filterPosts('All')"
+                        style="background:none; border:none; color:var(--color-primary); text-decoration:underline; cursor:pointer;">すべて表示</button>
+                </div>
+                <div id="latest-posts-grid">
+                    <!-- JS injects here -->
+                    <p>記事を読み込んでいます...</p>
+                </div>
+            </main>
+
+            <aside>
+                <div class="profile-widget">
+                    <img src="images/profile.jpg" alt="ねことら" class="profile-img">
+                    <div class="profile-name">ねことら</div>
+                    <span class="profile-role">管理会計及び生産管理 係長 / 中小企業診断士</span>
+                    <p style="text-align: left; font-size: 0.9rem; margin-top: 1rem;">
+                        泥臭い現場と冷徹なデータを行き来する「ねことそろばん」スタイルの経営論を発信中。妻と猫と暮らす。
+                    </p>
+                    <a href="about.html" class="btn">プロフィール詳細</a>
+                </div>
+
+                <!-- X Timeline Embed -->
+                <div style="margin-top: 2rem;">
+                    <a class="twitter-timeline" data-height="500" data-theme="light"
+                        href="https://twitter.com/makershindanshi?ref_src=twsrc%5Etfw">Tweets by makershindanshi</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 地方メーカー再生論 (ねことそろばん) All Rights Reserved.</p>
+    </footer>
+
+    <script src="posts.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
