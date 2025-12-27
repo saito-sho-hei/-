@@ -127,7 +127,7 @@ function parseXMLToPosts(xmlDoc) {
 
         // 判定ルール (タグ推奨)
         // 1. 賢い学生の地方戦略 (Career)
-        if (allText.match(/就職|学生|キャリア|新卒|地方|戦略|現場|中小企業/)) {
+        if (allText.match(/就職|学生|キャリア|新卒|地方|戦略|現場|中小企業|文系|メーカー|事務|面接|職種|四季報|ホワイト|偏差値|資格/)) {
             cleanCategory = 'Career';
         }
         // 2. 組織の数理分析 (Analytics)
