@@ -654,3 +654,60 @@ footer::before {
 .contact-form {
     border-bottom: 6px solid #4285f4;
 }
+
+/* Footer Social Icons */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-social a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-primary);
+    /* Changed to primary color for visibility on white/light bg if footer is light, or adjust if footer is dark */
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    background: white;
+    /* Make icons stand out */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-social a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer-social .social-note {
+    color: #2ecc71;
+}
+
+.footer-social .social-x {
+    color: #000;
+}
+
+.footer-social .social-line {
+    color: #06c755;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--color-primary);
+    color: white;
+    margin-top: 4rem;
+}
+
+footer p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
