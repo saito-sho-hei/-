@@ -38,6 +38,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function fetchNotePosts(container, filterCategory = null) {
+    // 1. まずキャッシュをチェック (有効期限: 60分)
+    const CACHE_KEY = 'note_rss_cache';
+    const CACHE_DURATION = 60 * 60 * 1000; // 60分
+    const cached = localStorage.getItem(CACHE_KEY);
+
+    if (cached) {
+        const { timestamp, data } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_DURATION) {
+            console.log('Using cached RSS data');
+            allPostsData = data;
+            renderFilteredPosts(container, filterCategory);
+            return; // キャッシュがあれば通信しない（高速化優先）
+        }
+    }
+
+    // 2. キャッシュがない、また期限切れなら通信
     // NoteのRSSには画像が <media:thumbnail> にしか含まれておらず、
     // rss2json などの変換サービスでは画像が欠落することがあるため、
     // CORSプロキシを通して「生のXML」を取得し、ブラウザで解析する方法に切り替えます。
@@ -56,7 +72,6 @@ async function fetchNotePosts(container, filterCategory = null) {
         if (fetchSuccess) break;
         try {
             // 読み込み負荷を下げるため、キャッシュを「10分間」効かせるように調整
-            // 1秒 = 1000ms, 1分 = 60000ms, 10分 = 600000ms
             const timestamp = Math.floor(Date.now() / 600000);
             const proxyUrl = proxy(NOTE_RSS_URL) + `&t=${timestamp}`;
             const response = await fetch(proxyUrl);
@@ -84,15 +99,33 @@ async function fetchNotePosts(container, filterCategory = null) {
         // パースしてデータを整形・保存
         allPostsData = parseXMLToPosts(xmlDoc);
 
-        if (filterCategory) {
-            const filtered = allPostsData.filter(post => post.category === filterCategory);
-            renderPosts(filtered, container);
-        } else {
-            renderPosts(allPostsData, container);
-        }
+        // キャッシュに保存
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+            timestamp: Date.now(),
+            data: allPostsData
+        }));
+
+        renderFilteredPosts(container, filterCategory);
     } else {
         console.error('All RSS fetches failed');
-        useFallbackPosts(container, filterCategory);
+        // 通信失敗時も、古いキャッシュがあればそれを使う救済措置
+        if (cached) {
+            const { data } = JSON.parse(cached);
+            allPostsData = data;
+            renderFilteredPosts(container, filterCategory);
+        } else {
+            useFallbackPosts(container, filterCategory);
+        }
+    }
+}
+
+// ヘルパー関数: フィルタリングと表示をまとめたもの
+function renderFilteredPosts(container, filterCategory) {
+    if (filterCategory) {
+        const filtered = allPostsData.filter(post => post.category === filterCategory);
+        renderPosts(filtered, container);
+    } else {
+        renderPosts(allPostsData, container);
     }
 }
 
