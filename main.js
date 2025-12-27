@@ -67,32 +67,34 @@ async function fetchNotePosts(container, filterCategory = null) {
     let xmlDoc = null;
     let fetchSuccess = false;
 
-    // プロキシを順番に試す
-    for (const proxy of proxies) {
-        if (fetchSuccess) break;
-        try {
-            // 読み込み負荷を下げるため、キャッシュを「10分間」効かせるように調整
-            const timestamp = Math.floor(Date.now() / 600000);
-            const proxyUrl = proxy(NOTE_RSS_URL) + `&t=${timestamp}`;
-            const response = await fetch(proxyUrl);
-            if (!response.ok) throw new Error(`Proxy error: ${response.status}`);
+    // プロキシを同時並行でリクエストし、一番早かったものを採用 (Promise.any / Race)
+    // これにより、初回の読み込み待ち時間を最小化します。
 
-            const xmlText = await response.text();
+    // 10分ごとのキャッシュバスター
+    const timestamp = Math.floor(Date.now() / 600000);
 
-            // XMLパース
-            const parser = new DOMParser();
-            xmlDoc = parser.parseFromString(xmlText, "text/xml");
+    const fetchPromises = proxies.map(proxy => {
+        const proxyUrl = proxy(NOTE_RSS_URL) + `&t=${timestamp}`;
+        return fetch(proxyUrl)
+            .then(res => {
+                if (!res.ok) throw new Error(`${res.status}`);
+                return res.text();
+            })
+            .then(text => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, "text/xml");
+                if (doc.getElementsByTagName("parsererror").length > 0) throw new Error("Parse error");
+                return doc;
+            });
+    });
 
-            // パースエラーのチェック
-            if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
-                throw new Error("XML parsing failed");
-            }
-
-            fetchSuccess = true;
-            console.log("RSS fetch success via", proxyUrl);
-        } catch (e) {
-            console.warn(`Proxy failed: ${e.message}`);
-        }
+    try {
+        // 一番早く成功したものを採用
+        xmlDoc = await Promise.any(fetchPromises);
+        fetchSuccess = true;
+        console.log("RSS fetch success (fastest proxy)");
+    } catch (errors) {
+        console.error("All proxies failed", errors);
     }
 
     if (fetchSuccess && xmlDoc) {
