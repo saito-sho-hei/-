@@ -55,7 +55,9 @@ async function fetchNotePosts(container, filterCategory = null) {
     for (const proxy of proxies) {
         if (fetchSuccess) break;
         try {
-            const timestamp = new Date().getTime(); // Cache busting
+            // 読み込み負荷を下げるため、キャッシュを「10分間」効かせるように調整
+            // 1秒 = 1000ms, 1分 = 60000ms, 10分 = 600000ms
+            const timestamp = Math.floor(Date.now() / 600000);
             const proxyUrl = proxy(NOTE_RSS_URL) + `&t=${timestamp}`;
             const response = await fetch(proxyUrl);
             if (!response.ok) throw new Error(`Proxy error: ${response.status}`);
