@@ -131,7 +131,7 @@ function parseXMLToPosts(xmlDoc) {
             cleanCategory = 'Career';
         }
         // 2. 組織の数理分析 (Analytics)
-        else if (allText.match(/分析|人事|ai|数理|データ/)) {
+        else if (allText.match(/分析|人事|ai|数理|データ|war|human/)) {
             cleanCategory = 'Analytics';
         }
         // 3. 経営の知恵袋 (Management) - 上記以外、または以下のキーワード
