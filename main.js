@@ -220,33 +220,9 @@ function renderPosts(postsData, container) {
 }
 
 function useFallbackPosts(container, filterCategory = null) {
-    if (typeof posts === 'undefined') {
-        container.innerHTML = '<p>記事の読み込みに失敗しました。</p>';
-        return;
-    }
-
-    // Fallbackデータも同様の形式に変換してrenderPostsに渡す
-    const adaptedPosts = posts.map((post, i) => {
-        let cleanCategory = 'Management';
-        if (post.category === 'Analytics') cleanCategory = 'Analytics';
-        if (post.category === 'Career') cleanCategory = 'Career';
-
-        return {
-            title: post.title,
-            link: post.url,
-            dateStr: post.date,
-            imageUrl: `https://loremflickr.com/600/400/${post.keyword}?lock=${i}`,
-            category: cleanCategory,
-            originalTags: []
-        };
-    });
-
-    allPostsData = adaptedPosts;
-
     if (filterCategory) {
-        const filtered = allPostsData.filter(post => post.category === filterCategory);
-        renderPosts(filtered, container);
+        container.innerHTML = '<p class="no-posts-message">記事が見つかりませんでした。</p>';
     } else {
-        renderPosts(allPostsData, container);
+        container.innerHTML = '<p class="error-message">Noteの記事を読み込めませんでした。<br>時間をおいて再読み込みしてください。</p>';
     }
 }
