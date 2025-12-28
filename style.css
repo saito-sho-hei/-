@@ -403,7 +403,6 @@ footer::before {
         text-align: left;
     }
 
-    /* Hamburger Menu Button */
     .hamburger {
         display: block;
         width: 30px;
@@ -744,6 +743,9 @@ footer p {
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: left;
+    position: relative;
+    /* For Matrix Effect */
+    overflow: hidden;
 }
 
 .option-btn:hover {
@@ -762,7 +764,7 @@ footer p {
 
 .result-type {
     font-size: 1.4rem;
-    font-weight: bold;
+    font-weight: 800;
     color: var(--color-primary);
     margin-bottom: 0.5rem;
     white-space: pre-wrap;
@@ -809,7 +811,136 @@ footer p {
     display: inline-block;
 }
 
-/* Mobile Adjustments for Diagnosis */
+/* Matrix Effect */
+.matrix-effect {
+    position: absolute;
+    pointer-events: none;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-accent-green);
+    animation: floatUp 1s ease-out forwards;
+    z-index: 100;
+    text-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+}
+
+.matrix-effect.negative {
+    color: #e74c3c;
+    text-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.2);
+    }
+}
+
+/* Rich Result Card Comparisons */
+.result-comparison {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.comparison-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    flex: 1;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-box.potential {
+    border: 2px solid var(--color-accent-orange);
+    background: #fff8f0;
+    position: relative;
+    transform: scale(1.05);
+    /* Emphasize */
+    box-shadow: 0 8px 16px rgba(244, 128, 36, 0.2);
+    z-index: 1;
+}
+
+.comparison-box.potential::before {
+    content: "ねことそろばん評価";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-accent-orange);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.comparison-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.comparison-role {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+    min-height: 3rem;
+    /* Align heights */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.3;
+}
+
+.comparison-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    display: block;
+}
+
+.comparison-box.potential .comparison-value {
+    color: #e74c3c;
+    /* Red highlight for high value */
+    font-size: 1.6rem;
+}
+
+.lost-profit {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #2c3e50;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.lost-profit-label {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.lost-profit-value {
+    font-size: 2.5rem;
+    /* Big impact */
+    font-weight: 900;
+    color: var(--color-accent-yellow);
+    display: block;
+    line-height: 1.2;
+}
+
 @media (max-width: 600px) {
     .diagnosis-container {
         margin: 1rem;
@@ -818,5 +949,14 @@ footer p {
 
     .result-score {
         font-size: 2rem;
+    }
+
+    .result-comparison {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .comparison-box.potential {
+        transform: scale(1);
     }
 }
