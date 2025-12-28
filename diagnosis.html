@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human WAR 診断 - 地方メーカー活躍論</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">🚀 地方メーカー活躍論 <span
+                style="font-size:0.8em; color:var(--color-accent-orange)">ねことそろばん</span></a>
+    </header>
+
+    <div class="container diagnosis-container">
+
+        <!-- Welcome Screen -->
+        <div id="screen-welcome" class="diagnosis-screen active">
+            <h1>あなたの「純粋な実力」を測る<br>Human WAR 診断</h1>
+            <p>成果＝実力×環境運。<br>その「運」を取り除いたとき、あなたには何が残るか？</p>
+            <p style="font-size: 0.9em; opacity: 0.8; margin-top: 1rem;">
+                所要時間: 1分 / 全5問
+            </p>
+            <button class="btn btn-primary" onclick="startDiagnosis()">診断を開始する</button>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="screen-question" class="diagnosis-screen">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <h2 id="question-category" class="question-category">Q1. 自走率</h2>
+            <p id="question-text" class="question-text">質問文がここに入ります</p>
+
+            <div class="options-grid">
+                <button class="option-btn" onclick="answerQuestion('A')">
+                    <span id="option-a-text">選択肢A</span>
+                </button>
+                <button class="option-btn" onclick="answerQuestion('B')">
+                    <span id="option-b-text">選択肢B</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="screen-result" class="diagnosis-screen">
+            <h2>診断結果</h2>
+
+            <div class="result-card">
+                <div class="result-type" id="result-type">タイプ名</div>
+                <div class="result-score">WARスコア: <span id="result-score-value">+0.00</span></div>
+                <p id="result-description" class="result-description">
+                    診断結果のテキストがここに入ります。
+                </p>
+            </div>
+
+            <div class="action-area">
+                <p>結果をシェアする</p>
+                <div class="share-buttons">
+                    <button class="btn-share-x" onclick="shareResult()">𝕏 Post</button>
+                </div>
+
+                <a href="recruit.html" class="btn btn-cta" style="margin-top: 2rem;">地方企業のオファーを受け取る</a>
+                <br>
+                <a href="index.html"
+                    style="display:inline-block; margin-top:1rem; color:var(--color-text-light);">トップに戻る</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 地方メーカー活躍論 (ねことそろばん) All Rights Reserved.</p>
+    </footer>
+
+    <script src="diagnosis.js"></script>
+</body>
+
+</html>

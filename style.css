@@ -175,19 +175,11 @@ h2 {
     font-weight: 800;
     word-break: keep-all;
     line-height: 1.5;
-    /* Reset h2 specific underline if needed, or keep it? */
-    /* The user complained about the yellow line on this, so we assume they want it, but fixed */
-    /* If pillar-title inherits h2, it gets the gradient. */
     background: none;
-    /* Actually, usually pillar title does NOT have the yellow highlight in the mock? */
-    /* Wait, the user said "yellow line". h2 has it. So pillar-title (which is h2) has it. */
-    /* But previously I saw .pillar-title didn't explicitly clear it. */
-    /* Let's keep the h2 styles but ensure display is correct. */
     display: inline;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     background: linear-gradient(transparent 70%, var(--color-accent-yellow) 70%);
-    /* Adjust position for smaller font */
 }
 
 /* Post Grid */
@@ -326,26 +318,6 @@ footer {
     position: relative;
 }
 
-/* Wave Decoration using CSS Radial Gradient
-   This creates a scalloped edge on top of the footer */
-footer::before {
-    content: '';
-    position: absolute;
-    top: -30px;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23fffaf0'/%3E%3C/svg%3E");
-    background-color: transparent;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* Inverting the logic: The SVG is the COLOR OF THE BODY (#fffaf0), overlaying the top of the footer */
-    transform: rotate(180deg);
-}
-
-/* Actually, a simpler wave might be better. Let's try to just cut the top of the footer. 
-   Or use a simpler SVG data uri for a standard wave. 
-*/
 footer::before {
     content: "";
     position: absolute;
@@ -353,18 +325,10 @@ footer::before {
     left: 0;
     width: 100%;
     height: 41px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231a2b4e' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231a2b4e' fill-opacity='1' d='M0,224L60,213.3C120,203,240,181,360,181.3C480,181,600,203,720,224C840,245,960,267,1080,261.3C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
     background-size: cover;
-    /* Cover ensures it stretches */
     background-position: bottom;
     transform: rotate(0deg);
-    /* The path is filled with footer color, so it sits ON TOP of body? No. 
-    The SVG above is a filled shape at the BOTTOM. If I put it at TOP of footer, I need the shape to be the footer color pointing UP. 
-    The SVG typically fills the bottom. 
-    Let's just use a simple mask-image if possible, but support is tricky.
-    Let's simpler: negative margin with a wave shape that is the same color as footer.
-    */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231a2b4e' fill-opacity='1' d='M0,224L60,213.3C120,203,240,181,360,181.3C480,181,600,203,720,224C840,245,960,267,1080,261.3C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
     height: 100px;
     top: -99px;
 }
@@ -384,7 +348,6 @@ footer::before {
     border-bottom: 2px dashed #ddd;
     padding-bottom: 0.5rem;
     background: none;
-    /* Reset gradient */
     display: block;
     color: var(--color-primary);
 }
@@ -427,18 +390,15 @@ footer::before {
 
     header {
         flex-direction: row;
-        /* Keep row for logo and hamburger */
         justify-content: space-between;
         gap: 0;
         align-items: center;
         padding: 0.8rem 1rem;
         position: sticky;
-        /* Ensure sticky */
     }
 
     .logo {
         font-size: 1.1rem;
-        /* Remove flex-direction column to keep logo inline if needed, or keep it */
         flex-direction: row;
         text-align: left;
     }
@@ -453,7 +413,6 @@ footer::before {
         background: none;
         border: none;
         z-index: 1001;
-        /* Above nav */
     }
 
     .hamburger span {
@@ -478,7 +437,6 @@ footer::before {
         top: 20px;
     }
 
-    /* Hamburger Animation */
     .hamburger.is-active span:nth-child(1) {
         top: 10px;
         transform: rotate(45deg);
@@ -497,7 +455,6 @@ footer::before {
     nav {
         position: absolute;
         top: 100%;
-        /* Below header */
         left: 0;
         width: 100%;
         background-color: var(--color-bg);
@@ -512,7 +469,6 @@ footer::before {
 
     nav.is-active {
         max-height: 400px;
-        /* Adjust based on content */
         padding-bottom: 1rem;
     }
 
@@ -543,13 +499,11 @@ footer::before {
 
     .hero h1 {
         font-size: 1.25rem;
-        /* Reduced from 1.5rem */
         line-height: 1.3;
     }
 
     .hero {
         padding: 2.5rem 1rem;
-        /* Reduced from 4rem */
         margin-bottom: 2rem;
     }
 
@@ -559,7 +513,6 @@ footer::before {
         margin: 0 0 1rem 0;
     }
 
-    /* Mobile Content Enhancements */
     .content-area {
         padding: 1.5rem;
     }
@@ -588,7 +541,6 @@ footer::before {
 
     .btn {
         width: 100%;
-        /* Full width buttons on mobile are easier to tap */
         text-align: center;
     }
 }
@@ -673,12 +625,10 @@ footer::before {
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--color-primary);
-    /* Changed to primary color for visibility on white/light bg if footer is light, or adjust if footer is dark */
     font-size: 1.2rem;
     transition: all 0.3s ease;
     text-decoration: none;
     background: white;
-    /* Make icons stand out */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -710,4 +660,163 @@ footer {
 footer p {
     opacity: 0.8;
     font-size: 0.9rem;
+}
+
+/* =========================================
+   Diagnosis Page Styles
+   ========================================= */
+.diagnosis-container {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.diagnosis-screen {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.diagnosis-screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.question-category {
+    font-size: 0.9rem;
+    color: var(--color-accent-orange);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.option-btn {
+    padding: 1.2rem;
+    border: 2px solid #eee;
+    background: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.option-btn:hover {
+    border-color: var(--color-primary);
+    background: #f0f7ff;
+}
+
+/* Result Card */
+.result-card {
+    background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid #d1d9e6;
+}
+
+.result-type {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+    /* 改行を有効化 */
+}
+
+.result-score {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-accent-orange);
+    margin: 1rem 0;
+}
+
+.result-description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.btn-share-x {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-share-x:hover {
+    opacity: 0.8;
+}
+
+.btn-cta {
+    background: var(--color-accent-orange);
+    color: white;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Mobile Adjustments for Diagnosis */
+@media (max-width: 600px) {
+    .diagnosis-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .result-score {
+        font-size: 2rem;
+    }
 }
