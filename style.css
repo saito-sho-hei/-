@@ -960,3 +960,103 @@ footer p {
         transform: scale(1);
     }
 }
+/* Novel Banner */
+.novel-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #2c3e50, #4b6cb7); /* Dark sophisticated blue/grey */
+    color: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.novel-banner::before {
+    content: "NOVEL";
+    position: absolute;
+    right: -20px;
+    bottom: -30px;
+    font-size: 8rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.05);
+    z-index: 0;
+    font-family: 'Georgia', serif;
+}
+
+.novel-banner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.novel-content {
+    position: relative;
+    z-index: 1;
+}
+
+.novel-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.novel-banner h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-family: "Yu Mincho", "YuMincho", serif; /* Literary feel */
+}
+
+.novel-banner p {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.novel-arrow {
+    font-size: 2rem;
+    font-weight: bold;
+    background: white;
+    color: #2c3e50;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.novel-banner:hover .novel-arrow {
+    transform: translateX(5px);
+}
+
+/* Mobile responsive for banner */
+@media (max-width: 768px) {
+    .novel-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .novel-banner h2 {
+        font-size: 1.5rem;
+    }
+    
+    .novel-arrow {
+        margin-top: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+}
